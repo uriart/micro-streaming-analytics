@@ -1,9 +1,9 @@
-package com.uriart.msa.cron;
+package com.uriart.msa.publisher.cron;
 
 import com.uriart.msa.dto.Device;
 import com.uriart.msa.dto.Event;
 import com.uriart.msa.dto.Ram;
-import com.uriart.msa.service.PublisherService;
+import com.uriart.msa.publisher.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

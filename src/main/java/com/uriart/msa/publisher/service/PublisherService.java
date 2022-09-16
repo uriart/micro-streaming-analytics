@@ -1,4 +1,4 @@
-package com.uriart.msa.service;
+package com.uriart.msa.publisher.service;
 
 import com.uriart.msa.dto.Event;
 import com.uriart.msa.publisher.Publisher;

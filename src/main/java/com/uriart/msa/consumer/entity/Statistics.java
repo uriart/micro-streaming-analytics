@@ -1,18 +1,22 @@
-package com.uriart.msa;
+package com.uriart.msa.consumer.entity;
 
 import com.uriart.msa.dto.Device;
 import com.uriart.msa.dto.Event;
 import com.uriart.msa.dto.Ram;
-import com.uriart.msa.utils.StatisticsUtils;
+import com.uriart.msa.consumer.utils.StatisticsUtils;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@Document
 public class Statistics {
-    private int id;
+    @Id
+    private String id;
     private LocalDateTime timeStamp;
     private double media;
     private int mediana;
@@ -22,7 +26,7 @@ public class Statistics {
     private int valorMaximo;
     private int valorMinimo;
 
-    /** Get Statistics from Event **/
+    /** Create Statistics from Event **/
     public Statistics(Event event){
         List<Integer> ramUsageList = event.getDevice()
                                             .stream()

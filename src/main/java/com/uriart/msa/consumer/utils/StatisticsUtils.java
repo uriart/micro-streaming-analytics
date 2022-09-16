@@ -1,4 +1,4 @@
-package com.uriart.msa.utils;
+package com.uriart.msa.consumer.utils;
 
 import org.springframework.stereotype.Component;
 

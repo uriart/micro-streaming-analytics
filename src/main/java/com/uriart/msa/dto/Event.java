@@ -8,7 +8,6 @@ import java.util.ArrayList;
 @Data
 public class Event implements Serializable {
 
-    private long id;
     private ArrayList<Device> device;
 
 }

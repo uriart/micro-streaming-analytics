@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+  spring-boot-app:
+    image: micro-streaming-analytics:latest
+    build:
+      context: .
+    container_name: spring-boot-app
+    depends_on:
+      - mongodb
+      - rabbitmq
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+      - URIART_QUEUE_NAME=data_queue
+      - SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE=admin
+      - SPRING_DATA_MONGODB_USERNAME=rootuser
+      - SPRING_DATA_MONGODB_PASSWORD=rootpass
+      - SPRING_DATA_MONGODB_DATABASE=statistics
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_HOST=mongodb
+    ports:
+      - '8080:8080'
+  mongodb:
+    image: mongo
+    container_name: 'mongodb'
+    ports:
+      - '27017:27017'
+    volumes:
+      - data:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - '8081:8081'
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+volumes:
+  data: {}
