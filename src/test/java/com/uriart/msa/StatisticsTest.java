@@ -1,9 +1,7 @@
 package com.uriart.msa;
 
 import com.uriart.msa.consumer.entity.Statistics;
-import com.uriart.msa.dto.Device;
-import com.uriart.msa.dto.Event;
-import com.uriart.msa.dto.Ram;
+import com.uriart.msa.dto.Datapoint;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +12,7 @@ public class StatisticsTest {
 
     @Test
     public void testStatisticsCalculation() {
-        Statistics statistics = new Statistics(initEvent());
+        Statistics statistics = new Statistics(initDatapointList());
         Assertions.assertNotNull(statistics);
         Assertions.assertNotNull(statistics.getTimeStamp());
         Assertions.assertEquals(statistics.getMedia(), 4.0);
@@ -26,15 +24,15 @@ public class StatisticsTest {
         Assertions.assertEquals(statistics.getValorMinimo(), 0.0);
     }
 
-    private Event initEvent(){
-        Event event = new Event();
-        ArrayList<Device> deviceList = new ArrayList<>();
+    private ArrayList<Datapoint> initDatapointList(){
+        ArrayList<Datapoint> datapointsList = new ArrayList<>();
         for(int i=0 ; i<5 ; i++){
-            Device device = new Device();
-            device.setRam(new Ram(i*2));
-            deviceList.add(device);
+            Datapoint datapoint = new Datapoint();
+            datapoint.setValue(i*2);
+            datapointsList.add(datapoint);
         }
-        event.setDevice(deviceList);
-        return event;
+        return datapointsList;
+
+
     }
 }
